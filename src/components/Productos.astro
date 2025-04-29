@@ -1,0 +1,50 @@
+---
+const response = await fetch("https://dummyjson.com/products/category/smartphones");
+const data = await response.json();
+// console.log(data);
+---
+
+{data.products.map((prd: any) => (
+  <div id="card">
+    
+      <img id="imageProd" src={prd.images[0]} alt={prd.title} />
+
+      <div id="nameProd">
+        <h2>{prd.title}</h2>
+      </div>
+      <div id="descripcionProd">  
+        <p>{prd.description}</p>
+      </div>
+  </div>
+))}
+
+
+
+<!-- footer -->
+
+<style>
+
+    #card {
+      display: flex;
+      flex-direction: row;
+      background-color: #E6E6FA;
+      border-radius: 10px;
+      width: 30%;
+      margin: 5px;
+      padding: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+    #nameProd {
+      padding: 10px;
+    }
+
+    #imageProd {
+      height: 250px;
+      width: 200px;
+    }
+
+    #descripcionProd {
+      padding: 10px;
+    }
+
+</style>
