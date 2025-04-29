@@ -5,15 +5,40 @@ import Layout from '../layouts/Layout.astro';
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+let urlAPI = "https://dummyjson.com/products/category-list";
+
+const response = await fetch(urlAPI);
+const data = await response.json();
 ---
 
 <Layout>
 	<div id="header">
-		<h1>Venta de Productos</h1>
+		<h1>TrendZone</h1>
+		<!-- <img id="imagenCarro" src="carro_compra.png"></img> -->
+	</div>
+	<div id="menu">
+		<nav class="nav">
+			<ul class="nav-list" id="navList">
+				<li>
+					<p>Categorias > 
+						<select id="categoriasList" >
+							<option value="--">Categorias</option>
+							{data.map((cat: any) => <option value={cat} } >{cat}</option>)}
+						</select>
+					</p>
+				</li>
+				<li><p class="navOpcion" id="OfertasBtn">Ofertas</p></li>
+				<li><p class="navOpcion" id="MasBuscadosBtn">Mas Buscados</p></li>
+				<li><p class="navOpcion" id="AyudaBtn">Ayuda</p></li>
+			</ul>
+		</nav>
 	</div>
 	<div id="container">
 		<Productos />
 	</div>
+	<footer>
+		<p>Todos los derechos reservados</p>
+	</footer>
 	
 </Layout>
 
@@ -29,28 +54,98 @@ import Layout from '../layouts/Layout.astro';
     h1, h2, h3 {
       color: #333333;
     }
-	p {
+	footer{
 		color: #6a5acd;
+		text-align: center;
+		background-color: #333333;
+		color:#FFFFFF;
+		padding: 0.5em;
 	}
 	
 	#container {
-		display: flex;
-		flex-direction: row;
-		flex-wrap: wrap;
-		justify-content: space-evenly;
-		align-items: stretch;
-		width: 98%;
-		margin: auto;
-		/* border: red solid 1px; */
+		display: grid;
+		grid-template-columns: repeat(auto-fit,minmax(300px, 1fr));
+		gap:2em;
+		margin-left: 1em;
+		margin-right: 1em;
+		margin-top: 1em;
+		margin-bottom: 1em;
 		background-color: #FFFFFF;
-      	border-radius: 12px;
-      	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+		justify-items: center;
+		justify-content: space-evenly;
     }
 
 	#header {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-evenly;
 		background-color: #DCEFFF;
 		padding: 10px 10px;
 		text-align: center;
+	}
+
+	.nav {
+        flex-grow: 1;
+		background-color: rgb(10, 117, 117);
+		color: #FFFFFF;
+        display: flex;
+		flex-direction: row;
+        justify-content: center;
+        position: relative;
+    }
+
+	.nav-list {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+		cursor: pointer;
+    }
+	.navOpcion{
+		cursor: pointer;
+	}
+
+	#categoriasList{
+		padding: 5px;
+		background-color: #DCEFFF;
+		border: 0px; border-radius: 10px;
+		cursor: pointer;
+	}
+	
+	@media (max-width: 861px) {
+		#header {
+			flex-direction: column;
+			gap: 5px; 
+			padding: 5px 0; 
+			align-items: center;
+		}
+
+		.nav {
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			width: 100%;
+			padding: 5px 0;
+			border: none; 
+		}
+
+		.nav-list {
+			flex-direction: column;
+			align-items: center;
+			gap: 4px; 
+			padding: 0;
+			margin: 0;
+			width: 100%;
+		}
+
+		.navOpcion {
+			padding: 4px 0;
+			margin: 0;
+			width: 100%;
+			text-align: center;
+			border: none; 
+		}
 	}
 
 </style>

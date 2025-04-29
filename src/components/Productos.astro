@@ -6,45 +6,64 @@ const data = await response.json();
 
 {data.products.map((prd: any) => (
   <div id="card">
-    
-      <img id="imageProd" src={prd.images[0]} alt={prd.title} />
-
       <div id="nameProd">
         <h2>{prd.title}</h2>
       </div>
       <div id="descripcionProd">  
         <p>{prd.description}</p>
       </div>
+      <div id="imagenDiv">
+        <img id="imageProd" src={prd.images[0]} alt={prd.title} />
+      </div>
+      <button class="nav-toggle" id="navToggle"> Comprar </button>
+      
   </div>
 ))}
-
-
-
-<!-- footer -->
 
 <style>
 
     #card {
       display: flex;
-      flex-direction: row;
+      flex-direction:column; 
       background-color: #E6E6FA;
       border-radius: 10px;
-      width: 30%;
-      margin: 5px;
-      padding: 10px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      text-align: center;
+      border: #9ab0c2 solid 1px;
+      box-shadow: 4px 4px 8px 4px rgba(10, 96, 230, 0.2),0 6px 20px 0 rgba(45, 18, 18, 0.19);
     }
     #nameProd {
       padding: 10px;
+      height: 3em;
+      margin: 1em;
     }
-
-    #imageProd {
-      height: 250px;
-      width: 200px;
-    }
-
     #descripcionProd {
       padding: 10px;
     }
+
+    #imagenDiv{
+      align-items: stretch;
+    }
+    #imageProd {
+      height: 260px;
+    }
+
+    .nav-toggle {
+        background-color: #e7653e; 
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 8px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin-top: auto
+    }
+
+    .nav-toggle:hover {
+        background-color: #e64a19; /* Color más oscuro al pasar el cursor */
+        transform: scale(1.05); /* Efecto sutil de zoom */
+    }
+        
 
 </style>
