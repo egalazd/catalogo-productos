@@ -1,3 +1,7 @@
+# Proyecto de listado de productos
+# correr con Astro
+# npm run dev
+
 # Astro Starter Kit: Basics
 
 ```sh
