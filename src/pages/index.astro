@@ -3,12 +3,12 @@ import Productos from '../components/Productos.astro';
 //import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
 
+import SelectCategorias from '../components/SelecccionCategoria.astro';
+
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
-let urlAPI = "https://dummyjson.com/products/category-list";
 
-const response = await fetch(urlAPI);
-const data = await response.json();
+
 ---
 
 <Layout>
@@ -20,11 +20,8 @@ const data = await response.json();
 		<nav class="nav">
 			<ul class="nav-list" id="navList">
 				<li>
-					<p>Categorias > 
-						<select id="categoriasList" >
-							<option value="--">Categorias</option>
-							{data.map((cat: any) => <option value={cat} } >{cat}</option>)}
-						</select>
+					<p>Categorias :
+						<SelectCategorias /> 
 					</p>
 				</li>
 				<li><p class="navOpcion" id="OfertasBtn">Ofertas</p></li>
@@ -104,6 +101,9 @@ const data = await response.json();
     }
 	.navOpcion{
 		cursor: pointer;
+	}
+	.navOpcion:hover {
+		font-weight: bold;
 	}
 
 	#categoriasList{

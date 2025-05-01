@@ -1,0 +1,21 @@
+---
+// SelectCategorias.astro
+let urlAPI = "https://dummyjson.com/products/category-list";
+const response = await fetch(urlAPI);
+const data = await response.json();
+---
+
+<select id="categoriasList">
+  {data.map((cat:any) => (
+    <option value={cat}>{cat}</option>
+  ))}
+</select>
+
+<script type="module" client:load>
+  const select = document.getElementById("categoriasList");
+  select.addEventListener("change", (event) => {
+    const seleccion = event.target.value;
+    console.log("Categoría seleccionada:", seleccion);
+    // lista_cards();
+  });
+</script>

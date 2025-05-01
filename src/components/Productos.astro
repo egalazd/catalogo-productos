@@ -1,9 +1,10 @@
 ---
-const response = await fetch("https://dummyjson.com/products/category/smartphones");
+const categoria = "smartphones"; 
+const response = await fetch(`https://dummyjson.com/products/category/${categoria}`);
 const data = await response.json();
 // console.log(data);
 ---
-
+<h2>Categoría: {categoria}</h2>
 {data.products.map((prd: any) => (
   <div id="card">
       <div id="nameProd">
