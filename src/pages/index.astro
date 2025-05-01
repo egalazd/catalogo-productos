@@ -3,25 +3,32 @@ import Productos from '../components/Productos.astro';
 //import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
 
-import SelectCategorias from '../components/SelecccionCategoria.astro';
+const response = await fetch('https://dummyjson.com/products/category-list');
+const categorias = await response.json();
+// console.log(categorias);
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
-
-
+const categoriaSeleccionada = Astro.url.searchParams.get("categoria") ?? "smartphones";
+// console.log(Astro.url.searchParams.get("categoria"));
 ---
 
 <Layout>
 	<div id="header">
 		<h1>TrendZone</h1>
-		<!-- <img id="imagenCarro" src="carro_compra.png"></img> -->
 	</div>
 	<div id="menu">
 		<nav class="nav">
 			<ul class="nav-list" id="navList">
 				<li>
-					<p>Categorias :
-						<SelectCategorias /> 
+					<form method="GET">
+						<p>Categorias >
+						<select id="categoriasList" name="categoria" onchange="this.form.submit()">
+						  <option value="">-- Todas --</option>
+						  {categorias.map(cat => (
+							<option value={cat} selected={cat === categoriaSeleccionada}>{cat}</option>
+						  ))}
+						</select>
+						</p>
+					  </form>
 					</p>
 				</li>
 				<li><p class="navOpcion" id="OfertasBtn">Ofertas</p></li>
@@ -31,7 +38,7 @@ import SelectCategorias from '../components/SelecccionCategoria.astro';
 		</nav>
 	</div>
 	<div id="container">
-		<Productos />
+		<Productos categoria={categoriaSeleccionada} />
 	</div>
 	<footer>
 		<p>Todos los derechos reservados</p>
